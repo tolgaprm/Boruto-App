@@ -1,4 +1,4 @@
-package com.prmto.navigation
+package com.prmto.borutoapp.navigation
 
 sealed class Screen(val route: String) {
     object Splash : Screen("splash_screen")

@@ -1,4 +1,4 @@
-package com.prmto.navigation
+package com.prmto.borutoapp.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
@@ -6,7 +6,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.prmto.util.Constants
+import com.prmto.borutoapp.util.Constants
 
 @Composable
 fun setupNavhGraph(navController: NavHostController) {
