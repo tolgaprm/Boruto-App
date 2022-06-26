@@ -6,20 +6,23 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.google.accompanist.pager.ExperimentalPagerApi
 import com.prmto.borutoapp.presentation.screen.splash.SplashScreen
+import com.prmto.borutoapp.presentation.screen.welcome.WelcomeScreen
 import com.prmto.borutoapp.util.Constants
 
+@OptIn(ExperimentalPagerApi::class)
 @Composable
-fun setupNavhGraph(navController: NavHostController) {
+fun SetupNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Splash.route
+        startDestination = Screen.Welcome.route
     ) {
         composable(Screen.Splash.route) {
             SplashScreen(navController = navController)
         }
         composable(Screen.Welcome.route) {
-
+            WelcomeScreen(navController)
         }
         composable(Screen.Home.route) {
 
