@@ -17,7 +17,7 @@ import okio.IOException
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(PREFERENCES_NAME)
 
-class DataStoreOperationsImpl(val context: Context) : DataStoreOperations {
+class DataStoreOperationsImpl(private val context: Context) : DataStoreOperations {
 
     private object PreferencesKey {
         val onBoardingKey = booleanPreferencesKey(PREFERENCES_KEY)
