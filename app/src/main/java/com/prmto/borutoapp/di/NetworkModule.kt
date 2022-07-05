@@ -1,7 +1,10 @@
 package com.prmto.borutoapp.di
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.prmto.borutoapp.data.local.BorutoDatabase
 import com.prmto.borutoapp.data.remote.BorutoApi
+import com.prmto.borutoapp.data.repository.RemoteDataSourceImpl
+import com.prmto.borutoapp.domain.repository.RemoteDataSource
 import com.prmto.borutoapp.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -47,5 +50,17 @@ object NetworkModule {
     @Singleton
     fun provideBorutoApi(retrofit: Retrofit): BorutoApi {
         return retrofit.create(BorutoApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRemoteMediator(
+        borutoApi: BorutoApi,
+        borutoDatabase: BorutoDatabase
+    ): RemoteDataSource {
+        return RemoteDataSourceImpl(
+            borutoApi = borutoApi,
+            borutoDatabase = borutoDatabase
+        )
     }
 }
