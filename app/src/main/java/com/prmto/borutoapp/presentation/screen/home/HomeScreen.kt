@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.prmto.borutoapp.presentation.components.RatingWidget
 
 @Composable
 fun HomeScreen(
@@ -20,6 +21,6 @@ fun HomeScreen(
             HomeTopBar(onSearchClicked = {})
         }
     ) { paddingValues ->
-        Text(text = "asd", modifier = Modifier.padding(paddingValues))
+        RatingWidget(modifier = Modifier.padding(paddingValues), rating = 3.4)
     }
 }
