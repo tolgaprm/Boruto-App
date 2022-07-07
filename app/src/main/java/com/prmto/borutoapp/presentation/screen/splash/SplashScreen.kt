@@ -50,15 +50,12 @@ fun SplashScreen(
         } else {
             navController.navigate(Screen.Welcome.route)
         }
-
-
     }
     Splash(rotate.value)
 }
 
 @Composable
 fun Splash(degrees: Float) {
-
     if (isSystemInDarkTheme()) {
         Box(
             modifier = Modifier

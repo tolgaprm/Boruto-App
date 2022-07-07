@@ -9,9 +9,10 @@ import com.prmto.borutoapp.data.local.BorutoDatabase
 import com.prmto.borutoapp.data.remote.BorutoApi
 import com.prmto.borutoapp.domain.model.Hero
 import com.prmto.borutoapp.domain.model.HeroRemoteKeys
+import com.prmto.borutoapp.util.Constants.HERO_STARTING_PAGE_INDEX
 import javax.inject.Inject
 
-@OptIn(ExperimentalPagingApi::class)
+@ExperimentalPagingApi
 class HeroRemoteMediator @Inject constructor(
     private val borutoApi: BorutoApi,
     private val borutoDatabase: BorutoDatabase
@@ -26,7 +27,7 @@ class HeroRemoteMediator @Inject constructor(
             val page = when (loadType) {
                 LoadType.REFRESH -> {
                     val remoteKeys = getRemoteKeyClosestToCurrentPosition(state)
-                    remoteKeys?.nextPage?.minus(1) ?: 1
+                    remoteKeys?.nextPage?.minus(1) ?: HERO_STARTING_PAGE_INDEX
                 }
                 LoadType.PREPEND -> {
                     val remoteKeys = getRemoteKeyForFirstItem(state)

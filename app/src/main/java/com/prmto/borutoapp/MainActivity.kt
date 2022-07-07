@@ -10,7 +10,7 @@ import com.prmto.borutoapp.navigation.SetupNavGraph
 import com.prmto.borutoapp.ui.theme.BorutoAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
-@OptIn(ExperimentalPagerApi::class)
+@ExperimentalPagerApi
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     

@@ -12,7 +12,7 @@ import com.prmto.borutoapp.presentation.screen.splash.SplashScreen
 import com.prmto.borutoapp.presentation.screen.welcome.WelcomeScreen
 import com.prmto.borutoapp.util.Constants
 
-@OptIn(ExperimentalPagerApi::class)
+@ExperimentalPagerApi
 @Composable
 fun SetupNavGraph(navController: NavHostController) {
     NavHost(
