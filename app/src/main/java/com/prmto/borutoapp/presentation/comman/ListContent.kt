@@ -22,6 +22,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.items
 import coil.annotation.ExperimentalCoilApi
@@ -30,6 +31,7 @@ import com.prmto.borutoapp.R
 import com.prmto.borutoapp.domain.model.Hero
 import com.prmto.borutoapp.navigation.Screen
 import com.prmto.borutoapp.presentation.components.RatingWidget
+import com.prmto.borutoapp.presentation.components.ShimmerEffect
 import com.prmto.borutoapp.ui.theme.*
 import com.prmto.borutoapp.util.Constants.BASE_URL
 
@@ -40,18 +42,49 @@ fun ListContent(
     heroes: LazyPagingItems<Hero>,
     navController: NavHostController
 ) {
-    LazyColumn(
-        contentPadding = PaddingValues(SMALL_PADDING),
-        verticalArrangement = Arrangement.spacedBy(SMALL_PADDING)
-    ) {
-        items(
-            items = heroes,
-            key = { hero -> hero.id }
-        ) { hero ->
-            hero?.let {
-                HeroItem(hero = it, navController = navController)
-            }
+    val result = handlePagingResult(heroes = heroes)
 
+    if (result){
+        LazyColumn(
+            contentPadding = PaddingValues(SMALL_PADDING),
+            verticalArrangement = Arrangement.spacedBy(SMALL_PADDING)
+        ) {
+            items(
+                items = heroes,
+                key = { hero -> hero.id }
+            ) { hero ->
+                hero?.let {
+                    HeroItem(hero = it, navController = navController)
+                }
+
+            }
+        }
+    }
+
+}
+
+
+@Composable
+fun handlePagingResult(
+    heroes: LazyPagingItems<Hero>
+): Boolean {
+    heroes.apply {
+        val error = when {
+            loadState.refresh is LoadState.Error -> loadState.refresh as LoadState.Error
+            loadState.append is LoadState.Error -> loadState.append as LoadState.Error
+            loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
+            else -> null
+        }
+
+        return when {
+            loadState.refresh is LoadState.Loading -> {
+                ShimmerEffect()
+                false
+            }
+            error != null -> {
+                false
+            }
+            else -> true
         }
     }
 }
