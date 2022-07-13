@@ -4,6 +4,7 @@ import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.MaterialTheme
@@ -22,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.items
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.prmto.borutoapp.R
@@ -31,13 +33,27 @@ import com.prmto.borutoapp.presentation.components.RatingWidget
 import com.prmto.borutoapp.ui.theme.*
 import com.prmto.borutoapp.util.Constants.BASE_URL
 
+@ExperimentalCoilApi
 @Composable
 fun ListContent(
     modifier: Modifier = Modifier,
     heroes: LazyPagingItems<Hero>,
     navController: NavHostController
 ) {
+    LazyColumn(
+        contentPadding = PaddingValues(SMALL_PADDING),
+        verticalArrangement = Arrangement.spacedBy(SMALL_PADDING)
+    ) {
+        items(
+            items = heroes,
+            key = { hero -> hero.id }
+        ) { hero ->
+            hero?.let {
+                HeroItem(hero = it, navController = navController)
+            }
 
+        }
+    }
 }
 
 @ExperimentalCoilApi
@@ -59,7 +75,7 @@ fun HeroItem(
         contentAlignment = Alignment.BottomStart
     ) {
         Surface(
-            shape = Shapes.large
+            shape = RoundedCornerShape(LARGE_PADDING)
         ) {
             Image(
                 modifier = Modifier.fillMaxSize(),
