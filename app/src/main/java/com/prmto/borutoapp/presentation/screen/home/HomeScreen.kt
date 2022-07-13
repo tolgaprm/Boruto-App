@@ -2,13 +2,12 @@ package com.prmto.borutoapp.presentation.screen.home
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.prmto.borutoapp.presentation.components.RatingWidget
+import com.prmto.borutoapp.presentation.comman.ListContent
 
 @Composable
 fun HomeScreen(
@@ -19,8 +18,13 @@ fun HomeScreen(
     Scaffold(
         topBar = {
             HomeTopBar(onSearchClicked = {})
+        },
+        content = {
+            ListContent(
+                modifier = Modifier.padding(it),
+                heroes = allHeroes,
+                navController = navController
+            )
         }
-    ) { paddingValues ->
-        RatingWidget(modifier = Modifier.padding(paddingValues), rating = 3.4)
-    }
+    )
 }

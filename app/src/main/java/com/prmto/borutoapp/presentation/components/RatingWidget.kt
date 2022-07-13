@@ -185,7 +185,7 @@ fun calculateStars(rating: Double): Map<String, Int> {
 
         if (firstNumber in 0..5 && lastNumber in 0..9) {
             filledStars = firstNumber
-            if (lastNumber in 0..5) {
+            if (lastNumber in 1..5) {
                 halfFilledStars++
             }
             if (lastNumber in 6..9) {
