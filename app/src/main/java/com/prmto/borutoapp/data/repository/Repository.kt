@@ -23,4 +23,8 @@ class Repository @Inject constructor(
     fun readOnBoardingState(): Flow<Boolean> {
         return dataStore.readOnBoardingState()
     }
+
+    fun searchHeroes(query: String): Flow<PagingData<Hero>> {
+        return remoteDataSource.searchHeroes(query = query)
+    }
 }
