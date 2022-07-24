@@ -3,6 +3,8 @@ package com.prmto.borutoapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import coil.annotation.ExperimentalCoilApi
@@ -11,6 +13,8 @@ import com.prmto.borutoapp.navigation.SetupNavGraph
 import com.prmto.borutoapp.ui.theme.BorutoAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
+@ExperimentalAnimationApi
+@ExperimentalMaterialApi
 @ExperimentalCoilApi
 @ExperimentalPagerApi
 @AndroidEntryPoint

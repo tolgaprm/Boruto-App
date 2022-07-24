@@ -1,6 +1,7 @@
 package com.prmto.borutoapp.presentation.screen.welcome
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -27,7 +28,8 @@ import com.prmto.borutoapp.ui.theme.*
 import com.prmto.borutoapp.util.Constants.LAST_ON_BOARDING_PAGE
 import com.prmto.borutoapp.util.Constants.ON_BOARDING_PAGE_COUNT
 
-@OptIn(ExperimentalPagerApi::class)
+@ExperimentalAnimationApi
+@ExperimentalPagerApi
 @Composable
 fun WelcomeScreen(
     navController: NavHostController,
@@ -117,7 +119,8 @@ fun PagerScreen(onBoardingPage: OnBoardingPage) {
     }
 }
 
-@OptIn(ExperimentalPagerApi::class)
+@ExperimentalPagerApi
+@ExperimentalAnimationApi
 @Composable
 fun FinishButton(
     modifier: Modifier,
