@@ -27,6 +27,7 @@ import com.prmto.borutoapp.presentation.components.OrderedList
 import com.prmto.borutoapp.ui.theme.*
 import com.prmto.borutoapp.util.Constants.ABOUT_TEXT_MAX_LINES
 import com.prmto.borutoapp.util.Constants.BASE_URL
+import com.prmto.borutoapp.util.Constants.MIN_BACKGROUND_IMAGE_HEIGHT
 
 
 @ExperimentalCoilApi
@@ -40,6 +41,8 @@ fun DetailsContent(
         bottomSheetState = rememberBottomSheetState(initialValue = Expanded)
     )
 
+    val currentSheetFraction = scaffoldState.currentSheetFraction
+
     BottomSheetScaffold(
         scaffoldState = scaffoldState,
         sheetPeekHeight = MIN_SHEET_HEIGHT,
@@ -49,7 +52,8 @@ fun DetailsContent(
         content = {
             selectedHero?.let { it1 ->
                 BackgroundContent(
-                      heroImage = it1.image,
+                    heroImage = it1.image,
+                    imageFraction = currentSheetFraction,
                     onCloseClicked = { navController.popBackStack() }
                 )
             }
@@ -181,7 +185,7 @@ fun BackgroundContent(
         Image(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(fraction = imageFraction)
+                .fillMaxHeight(fraction = imageFraction + MIN_BACKGROUND_IMAGE_HEIGHT)
                 .align(Alignment.TopStart),
             painter = painter,
             contentDescription = stringResource(id = R.string.hero_image),
@@ -205,6 +209,23 @@ fun BackgroundContent(
         }
     }
 }
+
+@ExperimentalMaterialApi
+val BottomSheetScaffoldState.currentSheetFraction: Float
+    get() {
+        val fraction = bottomSheetState.progress.fraction
+        val targetValue = bottomSheetState.targetValue
+        val currentValue = bottomSheetState.currentValue
+
+        return when {
+            currentValue == BottomSheetValue.Collapsed && targetValue == BottomSheetValue.Collapsed -> 1f
+            currentValue == Expanded && targetValue == Expanded -> 0f
+            currentValue == BottomSheetValue.Collapsed && targetValue == Expanded -> 1f - fraction
+            currentValue == Expanded && targetValue == BottomSheetValue.Collapsed -> 0f + fraction
+            else -> fraction
+        }
+    }
+
 
 @Composable
 @Preview
