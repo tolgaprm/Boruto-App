@@ -7,6 +7,9 @@ import androidx.palette.graphics.Palette
 import coil.ImageLoader
 import coil.request.ImageRequest
 import coil.request.SuccessResult
+import com.prmto.borutoapp.util.Constants.DARK_VIBRANT_KEY
+import com.prmto.borutoapp.util.Constants.ON_DARK_VIBRANT_KEY
+import com.prmto.borutoapp.util.Constants.VIBRANT_KEY
 
 object PaletteGenerator {
 
@@ -31,11 +34,11 @@ object PaletteGenerator {
 
     fun extractColorsFromBitmap(bitmap: Bitmap): Map<String, String> {
         return mapOf(
-            "vibrant" to parseColorSwatch(color = Palette.from(bitmap).generate().vibrantSwatch),
-            "darkVibrant" to parseColorSwatch(
+            VIBRANT_KEY to parseColorSwatch(color = Palette.from(bitmap).generate().vibrantSwatch),
+            DARK_VIBRANT_KEY to parseColorSwatch(
                 color = Palette.from(bitmap).generate().darkVibrantSwatch
             ),
-            "onDarkVibrant" to parseBodyColor(color =  Palette.from(bitmap).generate().darkVibrantSwatch?.bodyTextColor)
+            ON_DARK_VIBRANT_KEY to parseBodyColor(color =  Palette.from(bitmap).generate().darkVibrantSwatch?.bodyTextColor)
         )
     }
 

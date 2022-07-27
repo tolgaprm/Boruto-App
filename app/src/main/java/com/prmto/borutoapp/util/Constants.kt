@@ -26,4 +26,8 @@ object Constants {
 
 
     const val MIN_BACKGROUND_IMAGE_HEIGHT = 0.4f
+
+    const val VIBRANT_KEY ="vibrant"
+    const val DARK_VIBRANT_KEY="darkVibrant"
+    const val ON_DARK_VIBRANT_KEY = "onDarkVibrant"
 }

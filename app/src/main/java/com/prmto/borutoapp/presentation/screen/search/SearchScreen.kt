@@ -1,6 +1,7 @@
 package com.prmto.borutoapp.presentation.screen.search
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -9,7 +10,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.annotation.ExperimentalCoilApi
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.prmto.borutoapp.presentation.comman.ListContent
+import com.prmto.borutoapp.ui.theme.statusBarColor
 
 @ExperimentalCoilApi
 @Composable
@@ -20,6 +23,12 @@ fun SearchScreen(
 
     val searchQuery by searchViewModel.searchQuery
     val heroes = searchViewModel.searchHeroes.collectAsLazyPagingItems()
+
+    val systemUiController = rememberSystemUiController()
+
+    systemUiController.setStatusBarColor(
+        color = MaterialTheme.colors.statusBarColor
+    )
 
     Scaffold(
         topBar = {
